@@ -1,0 +1,39 @@
+html {
+  --lumo-font-size-xxxl: calc(30 / 16 * 1rem);
+  --lumo-font-size-xxl: calc(24 / 16 * 1rem);
+  --lumo-font-size-xl: calc(19 / 16 * 1rem);
+  --lumo-font-size-l: calc(16 / 16 * 1rem);
+  --lumo-font-size-m: calc(14 / 16 * 1rem);
+  --lumo-font-size-s: calc(13 / 16 * 1rem);
+  --lumo-font-size-xs: calc(12 / 16 * 1rem);
+  --lumo-font-size-xxs: calc(11 / 16 * 1rem);
+}
+
+@media (min-resolution: 3x) {
+  html {
+    --lumo-font-size-xxxl: calc(36 / 16 * 1rem);
+    --lumo-font-size-xxl: calc(28 / 16 * 1rem);
+    --lumo-font-size-xl: calc(22 / 16 * 1rem);
+    --lumo-font-size-l: calc(18 / 16 * 1rem);
+    --lumo-font-size-m: calc(16 / 16 * 1rem);
+    --lumo-font-size-s: calc(15 / 16 * 1rem);
+    --lumo-font-size-xs: calc(14 / 16 * 1rem);
+    --lumo-font-size-xxs: calc(13 / 16 * 1rem);
+  }
+}
+
+@media (pointer: coarse) {
+  html {
+    font-size: 17px;
+    /* Support iOS dynamic text size. Apply it only on touch devices (i.e., not on desktop Safari) */
+    font: -apple-system-body;
+  }
+}
+
+/* Set these on the body so that we only need to set them once, instead of again in the previous media query */
+body {
+  font-family: var(--lumo-font-family);
+  font-size: var(--lumo-font-size-m);
+  font-weight: 400;
+  line-height: var(--lumo-line-height-m);
+}

@@ -1,0 +1,44 @@
+.theme-select {
+  --vaadin-input-field-border-width: 0;
+  --vaadin-input-field-background: transparent;
+  --vaadin-field-default-width: auto;
+  margin-inline-start: auto;
+}
+
+.theme-select::part(toggle-button) {
+  display: none;
+}
+
+.theme-select vaadin-select-value-button {
+  width: auto;
+  mask-image: none;
+}
+
+.theme-select vaadin-select-value-button div span {
+  display: none;
+}
+
+.theme-select vaadin-icon {
+  width: var(--lumo-icon-size-s);
+}
+
+vaadin-select-overlay.theme-select vaadin-select-item {
+  text-transform: capitalize;
+  padding: 0 var(--lumo-space-s);
+}
+
+vaadin-select-overlay.theme-select vaadin-select-item::part(checkmark) {
+  order: 1;
+}
+
+vaadin-select-overlay.theme-select vaadin-select-item > div {
+  display: flex;
+  align-items: center;
+  gap: var(--lumo-space-s);
+}
+
+@media (any-hover: hover) {
+  .theme-select::part(input-field):hover {
+    background: var(--lumo-contrast-5pct);
+  }
+}

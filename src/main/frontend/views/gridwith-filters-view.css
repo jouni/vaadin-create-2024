@@ -1,0 +1,100 @@
+.gridwith-filters-view {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.gridwith-filters-view vaadin-grid {
+  height: 100%;
+}
+
+.gridwith-filters-view .filter-layout {
+  padding-bottom: var(--lumo-space-m);
+}
+
+.gridwith-filters-view .filter-layout > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: end;
+  gap: 0 var(--lumo-space-l);
+  padding: 0 var(--lumo-space-m);
+  overflow: hidden;
+}
+
+.gridwith-filters-view .filter-layout .double-width {
+  grid-column-end: span 2;
+}
+
+.gridwith-filters-view .filter-layout .actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  grid-column-end: -1;
+}
+
+.gridwith-filters-view .filter-layout vaadin-date-picker {
+  --vaadin-field-default-width: 6em;
+  width: 100%;
+}
+
+.gridwith-filters-view .filter-layout vaadin-combo-box {
+  --vaadin-field-default-width: auto;
+}
+
+/* Mobile filters */
+.gridwith-filters-view .mobile-filters {
+  padding: 0 var(--lumo-space-m);
+  margin: 0;
+  border-radius: 0;
+}
+.gridwith-filters-view .mobile-filters::part(label) {
+  width: 100%;
+  text-align: start;
+}
+
+@media screen and (min-width: 601px) {
+  .gridwith-filters-view .mobile-filters {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gridwith-filters-view {
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .gridwith-filters-view .filter-layout {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    opacity: 0;
+    padding-bottom: 0;
+    transition:
+      grid-template-rows 300ms ease-out,
+      opacity 300ms,
+      visibility 300ms;
+  }
+
+  .gridwith-filters-view .filter-layout.visible {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    opacity: 1;
+    padding-bottom: var(--lumo-space-m);
+  }
+
+  @media (prefers-reduced-motion) {
+    .gridwith-filters-view .filter-layout {
+      transition:
+        padding-bottom 0s 300ms,
+        grid-template-rows 0s 300ms,
+        opacity 300ms,
+        visibility 300ms;
+    }
+    .gridwith-filters-view .filter-layout.visible {
+      transition: opacity 300ms, visibility 300ms;
+    }
+  }
+
+  .gridwith-filters-view .filter-layout > div > * {
+    grid-column-end: span 2;
+  }
+}

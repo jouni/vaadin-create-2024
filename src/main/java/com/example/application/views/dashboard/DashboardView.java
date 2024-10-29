@@ -4,16 +4,17 @@ package com.example.application.views.dashboard;
 import com.example.application.views.dashboard.ServiceHealth.Status;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.charts.model.*;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -22,7 +23,6 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.BoxSizing;
 import com.vaadin.flow.theme.lumo.LumoUtility.FontSize;
 import com.vaadin.flow.theme.lumo.LumoUtility.FontWeight;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
@@ -32,6 +32,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility.TextColor;
 @PageTitle("Dashboard")
 @Route("")
 @Menu(order = 0, icon = "line-awesome/svg/chart-area-solid.svg")
+@CssImport("./views/dashboard-view.css")
 public class DashboardView extends Main {
 
     public DashboardView() {
@@ -41,12 +42,15 @@ public class DashboardView extends Main {
         board.addRow(createHighlight("Current users", "745", 33.7), createHighlight("View events", "54.6k", -112.45),
                 createHighlight("Conversion rate", "18%", 3.9), createHighlight("Custom metric", "-123.45", 0.0));
         board.addRow(createViewEvents());
-        board.addRow(createServiceHealth(), createResponseTimes());
+        Row row = new Row();
+        row.add(createServiceHealth(), 2);
+        row.add(createResponseTimes(), 2);
+        board.add(row);
         add(board);
     }
 
     private Component createHighlight(String title, String value, Double percentage) {
-        VaadinIcon icon = VaadinIcon.ARROW_UP;
+        SvgIcon icon = new SvgIcon("/themes/my-theme/icons/arrow-up-circle.svg");
         String prefix = "";
         String theme = "badge";
 
@@ -56,7 +60,7 @@ public class DashboardView extends Main {
             prefix = "+";
             theme += " success";
         } else if (percentage < 0) {
-            icon = VaadinIcon.ARROW_DOWN;
+            icon = new SvgIcon("/themes/my-theme/icons/arrow-down-circle.svg");
             theme += " error";
         }
 
@@ -66,10 +70,8 @@ public class DashboardView extends Main {
         Span span = new Span(value);
         span.addClassNames(FontWeight.SEMIBOLD, FontSize.XXXLARGE);
 
-        Icon i = icon.create();
-        i.addClassNames(BoxSizing.BORDER, Padding.XSMALL);
 
-        Span badge = new Span(i, new Span(prefix + percentage.toString()));
+        Span badge = new Span(icon, new Span(prefix + percentage.toString()));
         badge.getElement().getThemeList().add(theme);
 
         VerticalLayout layout = new VerticalLayout(h2, span, badge);

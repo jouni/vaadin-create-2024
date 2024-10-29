@@ -2,12 +2,14 @@ package com.example.application.views;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
+import com.vaadin.flow.component.orderedlayout.ScrollerVariant;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.Layout;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @Layout
 @AnonymousAllowed
+@CssImport("./views/main-layout.css")
 public class MainLayout extends AppLayout {
 
     private H1 viewTitle;
@@ -45,9 +48,13 @@ public class MainLayout extends AppLayout {
     private void addDrawerContent() {
         Span appName = new Span("My App");
         appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
-        Header header = new Header(appName);
+
+        ThemeSelect themeSelect = new ThemeSelect();
+
+        Header header = new Header(appName, themeSelect);
 
         Scroller scroller = new Scroller(createNavigation());
+        scroller.addThemeVariants(ScrollerVariant.LUMO_OVERFLOW_INDICATORS);
 
         addToDrawer(header, scroller, createFooter());
     }

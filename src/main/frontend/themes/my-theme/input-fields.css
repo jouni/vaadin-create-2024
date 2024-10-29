@@ -1,0 +1,71 @@
+html {
+  --vaadin-input-field-focused-label-color: var(--lumo-body-text-color);
+  --vaadin-input-field-border-width: 1px;
+  --vaadin-input-field-border-color: var(--lumo-contrast-20pct);
+  --vaadin-input-field-background: linear-gradient(var(--lumo-tint-5pct), var(--lumo-tint-5pct)) var(--lumo-base-color);
+  --vaadin-input-field-label-color: var(--lumo-body-text-color);
+  --vaadin-checkbox-background: var(--lumo-base-color);
+  --vaadin-checkbox-background-hover: var(--lumo-contrast-5pct);
+}
+
+:is(vaadin-checkbox, vaadin-radio-button) {
+  --vaadin-input-field-border-color: var(--lumo-contrast-30pct);
+}
+
+:is(
+  vaadin-text-field,
+  vaadin-text-area,
+  vaadin-date-picker,
+  vaadin-time-picker,
+  vaadin-select,
+  vaadin-combo-box,
+  vaadin-multi-select-combo-box,
+  vaadin-number-field,
+  vaadin-password-field,
+  vaadin-email-field
+):hover::part(input-field)::after {
+  display: none;
+}
+
+:is(
+  vaadin-text-field,
+  vaadin-text-area,
+  vaadin-date-picker,
+  vaadin-time-picker,
+  vaadin-combo-box,
+  vaadin-multi-select-combo-box,
+  vaadin-number-field,
+  vaadin-password-field,
+  vaadin-email-field
+)[focused]::part(input-field) {
+  box-shadow: 0 0 0 var(--vaadin-focus-ring-width, 2px) var(--vaadin-focus-ring-color, var(--lumo-primary-color-50pct));
+}
+
+:is(
+  vaadin-date-picker,
+  vaadin-select,
+  vaadin-combo-box,
+  vaadin-multi-select-combo-box
+)::part(toggle-button) {
+  color: transparent;
+  background: var(--lumo-contrast-60pct);
+}
+
+@media (any-hover: hover) {
+  :is(
+    vaadin-date-picker,
+    vaadin-select,
+    vaadin-combo-box,
+    vaadin-multi-select-combo-box
+  )::part(toggle-button):hover {
+    background: var(--lumo-contrast-80pct);
+  }
+}
+
+:is(vaadin-select, vaadin-combo-box, vaadin-multi-select-combo-box)::part(toggle-button) {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>');
+}
+
+vaadin-date-picker::part(toggle-button) {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>');
+}

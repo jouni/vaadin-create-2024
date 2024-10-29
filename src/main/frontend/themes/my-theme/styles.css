@@ -1,0 +1,23 @@
+@import "fonts/Sora.css";
+
+@import "input-fields.css";
+@import "typography.css";
+@import "colors.css";
+
+html {
+  --lumo-font-family: "Sora", system-ui, sans-serif;
+
+  --lumo-border-radius-s: 5px;
+  --lumo-border-radius-m: 7px;
+  --lumo-border-radius-l: 14px;
+}
+
+@media (pointer: coarse) {
+  html {
+    --lumo-size-xl: 64px;
+    --lumo-size-l: 56px;
+    --lumo-size-m: 48px;
+    --lumo-size-s: 40px;
+    --lumo-size-xs: 32px;
+  }
+}

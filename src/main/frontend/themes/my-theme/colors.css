@@ -1,0 +1,86 @@
+html[theme] {
+  --lumo-base-color: var(--base);
+
+  --contrast: oklch(from var(--base) clamp(0, (0.6 - l) * 1000, 1) 0 0);
+  --lumo-contrast: var(--contrast);
+  --lumo-contrast-90pct: oklch(from var(--contrast) l c h / 0.9);
+  --lumo-contrast-80pct: oklch(from var(--contrast) l c h / 0.8);
+  --lumo-contrast-70pct: oklch(from var(--contrast) l c h / 0.7);
+  --lumo-contrast-60pct: oklch(from var(--contrast) l c h / 0.6);
+  --lumo-contrast-50pct: oklch(from var(--contrast) l c h / 0.5);
+  --lumo-contrast-40pct: oklch(from var(--contrast) l c h / 0.39);
+  --lumo-contrast-30pct: oklch(from var(--contrast) l c h / 0.28);
+  --lumo-contrast-20pct: oklch(from var(--contrast) l c h / 0.16);
+  --lumo-contrast-10pct: oklch(from var(--contrast) l c h / 0.08);
+  --lumo-contrast-5pct: oklch(from var(--contrast) l c h / 0.04);
+
+  --shade: oklch(from var(--primary) calc(l - 0.2) calc(c / 10) h);
+  --lumo-shade: oklch(from var(--shade) l c h);
+  --lumo-shade-90pct: oklch(from var(--shade) l c h / calc(1 - l / 4));
+  --lumo-shade-80pct: oklch(from var(--shade) l c h / calc(0.9 - l / 4));
+  --lumo-shade-70pct: oklch(from var(--shade) l c h / calc(0.8 - l / 4));
+  --lumo-shade-60pct: oklch(from var(--shade) l c h / calc(0.7 - l / 4));
+  --lumo-shade-50pct: oklch(from var(--shade) l c h / calc(0.6 - l / 4));
+  --lumo-shade-40pct: oklch(from var(--shade) l c h / calc(0.5 - l / 4));
+  --lumo-shade-30pct: oklch(from var(--shade) l c h / calc(0.4 - l / 4));
+  --lumo-shade-20pct: oklch(from var(--shade) l c h / calc(0.3 - l / 4));
+  --lumo-shade-10pct: oklch(from var(--shade) l c h / calc(0.2 - l / 4));
+  --lumo-shade-5pct: oklch(from var(--shade) l c h / calc(0.15 - l / 4));
+
+  --tint: oklch(from var(--base) calc(l + 0.4) calc(c / 4) h);
+  --lumo-tint: oklch(from var(--tint) l c h);
+  --lumo-tint-90pct: oklch(from var(--tint) l c h / 0.9);
+  --lumo-tint-80pct: oklch(from var(--tint) l c h / 0.8);
+  --lumo-tint-70pct: oklch(from var(--tint) l c h / 0.7);
+  --lumo-tint-60pct: oklch(from var(--tint) l c h / 0.6);
+  --lumo-tint-50pct: oklch(from var(--tint) l c h / 0.5);
+  --lumo-tint-40pct: oklch(from var(--tint) l c h / 0.39);
+  --lumo-tint-30pct: oklch(from var(--tint) l c h / 0.28);
+  --lumo-tint-20pct: oklch(from var(--tint) l c h / 0.16);
+  --lumo-tint-10pct: oklch(from var(--tint) l c h / 0.08);
+  --lumo-tint-5pct: oklch(from var(--tint) l c h / 0.04);
+
+  --lumo-primary-color: var(--primary);
+  --lumo-primary-contrast-color: oklch(from var(--primary) clamp(0, (0.6 - l) * 1000, 1) 0 0);
+  --lumo-primary-text-color: oklch(from var(--primary) var(--text-l) c h);
+  --lumo-primary-color-50pct: oklch(from var(--primary) l c h / 0.6);
+  --lumo-primary-color-10pct: oklch(from var(--primary) l c h / 0.13);
+
+  --lumo-success-color: var(--success);
+  --lumo-success-contrast-color: oklch(from var(--success) clamp(0, (0.6 - l) * 1000, 1) 0 0);
+  --lumo-success-text-color: oklch(from var(--success) var(--text-l) c h);
+  --lumo-success-color-50pct: oklch(from var(--success) l c h / 0.6);
+  --lumo-success-color-10pct: oklch(from var(--success) l c h / 0.13);
+
+  --lumo-error-color: var(--error);
+  --lumo-error-contrast-color: oklch(from var(--error) clamp(0, (0.6 - l) * 1000, 1) 0 0);
+  --lumo-error-text-color: oklch(from var(--error) var(--text-l) c h);
+  --lumo-error-color-50pct: oklch(from var(--error) l c h / 0.6);
+  --lumo-error-color-10pct: oklch(from var(--error) l c h / 0.13);
+}
+
+html {
+  --base: #fff;
+  --primary: hsl(200, 80%, 40%);
+  --success: hsl(170, 91%, 38%);
+  --error: hsl(335, 70%, 50%);
+  --text-l: min(l, 0.5);
+}
+
+html[theme~=dark] {
+  --base: #111;
+  --shade: #000;
+  --primary: hsl(200, 80%, 60%);
+  --text-l: max(l, 0.8);
+  --charts-l: 0.6;
+  --tint: oklch(from var(--primary) l calc(c / 4) h);
+}
+
+vaadin-chart {
+  --vaadin-charts-color-0: oklch(from var(--primary) var(--charts-l, l) c h);
+  --vaadin-charts-color-1: oklch(from var(--primary) calc(var(--charts-l, l) + 0.1) c calc(h - 20));
+  --vaadin-charts-color-2: oklch(from var(--primary) calc(var(--charts-l, l) - 0.1) c calc(h + 20));
+  --vaadin-charts-color-3: oklch(from var(--primary) calc(var(--charts-l, l) + 0.1) c calc(h - 40));
+  --vaadin-charts-color-4: oklch(from var(--primary) calc(var(--charts-l, l) - 0.1) c calc(h + 40));
+  --vaadin-charts-color-5: oklch(from var(--primary) calc(var(--charts-l, l) + 0.1) c calc(h - 60));
+}

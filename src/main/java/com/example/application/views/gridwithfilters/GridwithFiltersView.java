@@ -9,16 +9,14 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.Uses;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
@@ -39,6 +37,7 @@ import org.springframework.data.jpa.domain.Specification;
 @Route("grid-with-filters")
 @Menu(order = 2, icon = "line-awesome/svg/filter-solid.svg")
 @Uses(Icon.class)
+@CssImport("./views/gridwith-filters-view.css")
 public class GridwithFiltersView extends Div {
 
     private Grid<SamplePerson> grid;
@@ -52,25 +51,18 @@ public class GridwithFiltersView extends Div {
         addClassNames("gridwith-filters-view");
 
         filters = new Filters(() -> refreshGrid());
-        VerticalLayout layout = new VerticalLayout(createMobileFilters(), filters, createGrid());
-        layout.setSizeFull();
-        layout.setPadding(false);
-        layout.setSpacing(false);
-        add(layout);
+        add(createMobileFilters(), filters, createGrid());
     }
 
-    private HorizontalLayout createMobileFilters() {
+    private Button createMobileFilters() {
         // Mobile version
-        HorizontalLayout mobileFilters = new HorizontalLayout();
+        Button mobileFilters = new Button("Filters");
+        mobileFilters.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         mobileFilters.setWidthFull();
-        mobileFilters.addClassNames(LumoUtility.Padding.MEDIUM, LumoUtility.BoxSizing.BORDER,
-                LumoUtility.AlignItems.CENTER);
         mobileFilters.addClassName("mobile-filters");
 
         Icon mobileIcon = new Icon("lumo", "plus");
-        Span filtersHeading = new Span("Filters");
-        mobileFilters.add(mobileIcon, filtersHeading);
-        mobileFilters.setFlexGrow(1, filtersHeading);
+        mobileFilters.setIcon(mobileIcon);
         mobileFilters.addClickListener(e -> {
             if (filters.getClassNames().contains("visible")) {
                 filters.removeClassName("visible");
@@ -93,11 +85,7 @@ public class GridwithFiltersView extends Div {
         private final CheckboxGroup<String> roles = new CheckboxGroup<>("Role");
 
         public Filters(Runnable onSearch) {
-
-            setWidthFull();
             addClassName("filter-layout");
-            addClassNames(LumoUtility.Padding.Horizontal.LARGE, LumoUtility.Padding.Vertical.MEDIUM,
-                    LumoUtility.BoxSizing.BORDER);
             name.setPlaceholder("First or last name");
 
             occupations.setItems("Insurance Clerk", "Mortarman", "Beer Coil Cleaner", "Scale Attendant");
@@ -125,7 +113,7 @@ public class GridwithFiltersView extends Div {
             actions.addClassName(LumoUtility.Gap.SMALL);
             actions.addClassName("actions");
 
-            add(name, phone, createDateRangeFilter(), occupations, roles, actions);
+            add(new Div(name, phone, createDateRangeFilter(), occupations, roles, actions));
         }
 
         private Component createDateRangeFilter() {
@@ -230,7 +218,7 @@ public class GridwithFiltersView extends Div {
         grid.setItems(query -> samplePersonService.list(
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)),
                 filters).stream());
-        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
+        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_NO_ROW_BORDERS, GridVariant.LUMO_COLUMN_BORDERS);
         grid.addClassNames(LumoUtility.Border.TOP, LumoUtility.BorderColor.CONTRAST_10);
 
         return grid;

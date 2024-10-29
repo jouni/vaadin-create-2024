@@ -1,3 +1,8 @@
+.dashboard-view {
+  --vaadin-board-width-small: 20em;
+  --vaadin-board-width-medium: 40em;
+}
+
 /* Borders */
 
 .dashboard-view vaadin-board-row > * {

@@ -1,12 +1,12 @@
 package com.example.application.views.feed;
 
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -20,6 +20,7 @@ import java.util.List;
 @PageTitle("Feed")
 @Route("feed")
 @Menu(order = 1, icon = "line-awesome/svg/list-solid.svg")
+@CssImport("./views/feed-view.css")
 public class FeedView extends Div implements AfterNavigationObserver {
 
     Grid<Person> grid = new Grid<>();
@@ -36,8 +37,7 @@ public class FeedView extends Div implements AfterNavigationObserver {
     private HorizontalLayout createCard(Person person) {
         HorizontalLayout card = new HorizontalLayout();
         card.addClassName("card");
-        card.setSpacing(false);
-        card.getThemeList().add("spacing-s");
+        card.setSpacing(true);
 
         Image image = new Image();
         image.setSrc(person.getImage());
@@ -63,17 +63,16 @@ public class FeedView extends Div implements AfterNavigationObserver {
         HorizontalLayout actions = new HorizontalLayout();
         actions.addClassName("actions");
         actions.setSpacing(false);
-        actions.getThemeList().add("spacing-s");
 
-        Icon likeIcon = VaadinIcon.HEART.create();
+        SvgIcon likeIcon = new SvgIcon("/themes/my-theme/icons/heart.svg");
         likeIcon.addClassName("icon");
         Span likes = new Span(person.getLikes());
         likes.addClassName("likes");
-        Icon commentIcon = VaadinIcon.COMMENT.create();
+        SvgIcon commentIcon = new SvgIcon("/themes/my-theme/icons/chat.svg");
         commentIcon.addClassName("icon");
         Span comments = new Span(person.getComments());
         comments.addClassName("comments");
-        Icon shareIcon = VaadinIcon.CONNECT.create();
+        SvgIcon shareIcon = new SvgIcon("/themes/my-theme/icons/share.svg");
         shareIcon.addClassName("icon");
         Span shares = new Span(person.getShares());
         shares.addClassName("shares");
